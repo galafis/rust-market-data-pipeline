@@ -1,129 +1,217 @@
-# rust-market-data-pipeline
+# 🔄 Rust Market Data Pipeline
 
 ![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
 ![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)
 ![Tokio](https://img.shields.io/badge/tokio-async-green.svg?style=for-the-badge)
 ![Polars](https://img.shields.io/badge/polars-data-orange.svg?style=for-the-badge)
+![Build](https://img.shields.io/badge/build-passing-brightgreen.svg?style=for-the-badge)
 
-**A robust Rust-based data pipeline for ingesting, processing, and storing real-time financial market data.**
+<div align="center">
+  <img src="docs/images/hero.jpg" alt="Market Data Pipeline" width="800"/>
+</div>
+
+<div align="center">
+  <h3>⚡ High-performance data pipeline for financial market data</h3>
+  <p>Ingest, process, and store market data with blazing speed and reliability</p>
+</div>
 
 ---
 
 ## 🇧🇷 Descrição em Português
 
-`rust-market-data-pipeline` é um sistema de código aberto para a ingestão, processamento e armazenamento de dados do mercado financeiro. Construído em Rust, este projeto foi projetado para ser escalável e de alto desempenho, com suporte para múltiplas fontes de dados e formatos de armazenamento.
+`rust-market-data-pipeline` é um sistema robusto e escalável para **ingestão**, **processamento** e **armazenamento** de dados do mercado financeiro. Construído em Rust com Tokio para operações assíncronas, oferece **baixa latência**, **alta throughput** e **confiabilidade** para aplicações financeiras críticas.
 
-Este é o segundo de uma série de cinco repositórios focados em trading, mercado financeiro e IA, criados para demonstrar a força do Rust em aplicações financeiras que exigem baixa latência e alta confiabilidade.
+### ✨ Funcionalidades Principais
 
-### Funcionalidades
-
-- **Conectores de Dados:** Módulo para se conectar a APIs de mercado (ex: Alpha Vantage) e buscar dados históricos e em tempo real.
-- **Processamento de Dados:** Funções para limpar, normalizar e transformar os dados brutos em um formato estruturado e pronto para análise.
-- **Armazenamento Eficiente:** Suporte para armazenamento de dados no formato colunar Apache Parquet, ideal para análise de big data.
-- **Arquitetura Modular:** O pipeline é dividido em múltiplos crates, separando as responsabilidades de coleta, processamento e utilitários.
+- 🔌 **Conectores de Dados** - Integração com APIs de mercado (Alpha Vantage, etc.)
+- 🔄 **Processamento Assíncrono** - Pipeline não-bloqueante com Tokio
+- 💾 **Armazenamento Eficiente** - Formato colunar Apache Parquet
+- 🧹 **Limpeza de Dados** - Normalização e transformação automática
+- 🏗️ **Arquitetura Modular** - Crates independentes e reutilizáveis
 
 ---
 
 ## 🇺🇸 English Description
 
-`rust-market-data-pipeline` is an open-source system for ingesting, processing, and storing financial market data. Built in Rust, this project is designed to be scalable and high-performance, with support for multiple data sources and storage formats.
+`rust-market-data-pipeline` is a robust and scalable system for **ingesting**, **processing**, and **storing** financial market data. Built in Rust with Tokio for asynchronous operations, it offers **low latency**, **high throughput**, and **reliability** for critical financial applications.
 
-This is the second in a series of five repositories focused on trading, the financial market, and AI, created to demonstrate the power of Rust in financial applications that require low latency and high reliability.
+### ✨ Key Features
 
-### Features
-
-- **Data Connectors:** A module to connect to market data APIs (e.g., Alpha Vantage) and fetch historical and real-time data.
-- **Data Processing:** Functions to clean, normalize, and transform raw data into a structured format ready for analysis.
-- **Efficient Storage:** Support for storing data in the Apache Parquet columnar format, ideal for big data analytics.
-- **Modular Architecture:** The pipeline is divided into multiple crates, separating the responsibilities of data collection, processing, and utilities.
+- 🔌 **Data Connectors** - Integration with market APIs (Alpha Vantage, etc.)
+- 🔄 **Asynchronous Processing** - Non-blocking pipeline with Tokio
+- 💾 **Efficient Storage** - Apache Parquet columnar format
+- 🧹 **Data Cleaning** - Automatic normalization and transformation
+- 🏗️ **Modular Architecture** - Independent and reusable crates
 
 ---
 
 ## 🚀 Quick Start
 
-### Pré-requisitos
+### Prerequisites
 
-- Rust (https://www.rust-lang.org/tools/install)
+- [Rust](https://www.rust-lang.org/tools/install) 1.70+
 - Git
-- Uma chave de API da [Alpha Vantage](https://www.alphavantage.co/support/#api-key) (gratuita)
+- [Alpha Vantage API Key](https://www.alphavantage.co/support/#api-key) (free)
 
-### Instalação
+### Installation
 
-1. Clone o repositório:
 ```bash
-git clone https://github.com/your-username/rust-market-data-pipeline.git
+# Clone the repository
+git clone https://github.com/galafis/rust-market-data-pipeline.git
 cd rust-market-data-pipeline
-```
 
-2.  **Importante:** Abra o arquivo `examples/data_pipeline.rs` e substitua `"YOUR_API_KEY"` pela sua chave de API da Alpha Vantage.
-
-3. Compile e execute o exemplo:
-```bash
+# Run the example
 cargo run --example data_pipeline
 ```
 
-### Exemplo de Saída
-
-O exemplo irá buscar os dados diários para o ticker da IBM, processá-los e salvá-los em um arquivo Parquet.
+### Example Output
 
 ```
 Dados brutos recebidos:
 shape: (100, 6)
-┌────────────┬──────────┬──────────┬──────────┬──────────┬──────────┐
-│ date       ┆ open     ┆ high     ┆ low      ┆ close    ┆ volume   │
-│ ---        ┆ ---      ┆ ---      ┆ ---      ┆ ---      ┆ ---      │
-│ str        ┆ f64      ┆ f64      ┆ f64      ┆ f64      ┆ i64      │
-╞════════════╪══════════╪══════════╪══════════╪══════════╪══════════╡
-│ 2024-05-23 ┆ 169.98   ┆ 171.49   ┆ 169.23   ┆ 170.83   ┆ 3456789  │
-│ 2024-05-22 ┆ 170.01   ┆ 170.89   ┆ 169.5    ┆ 170.0    ┆ 2345678  │
-│ ...        ┆ ...      ┆ ...      ┆ ...      ┆ ...      ┆ ...      │
-│ 2024-01-02 ┆ 162.1    ┆ 163.48   ┆ 161.5    ┆ 163.0    ┆ 4567890  │
-└────────────┴──────────┴──────────┴──────────┴──────────┴──────────┘
-Dados processados e armazenados em data/ibm_daily.parquet
+┌────────────┬────────┬────────┬─────────┬────────┬─────────┐
+│ date       ┆ open   ┆ high   ┆ low     ┆ close  ┆ volume  │
+│ ---        ┆ ---    ┆ ---    ┆ ---     ┆ ---    ┆ ---     │
+│ str        ┆ f64    ┆ f64    ┆ f64     ┆ f64    ┆ i64     │
+╞════════════╪════════╪════════╪═════════╪════════╪═════════╡
+│ 2025-10-02 ┆ 285.79 ┆ 288.54 ┆ 282.79  ┆ 286.72 ┆ 3814232 │
+│ 2025-07-03 ┆ 287.94 ┆ 292.32 ┆ 287.9   ┆ 291.97 ┆ 1853289 │
+│ ...        ┆ ...    ┆ ...    ┆ ...     ┆ ...    ┆ ...     │
+└────────────┴────────┴────────┴─────────┴────────┴─────────┘
+Dados processados e armazenados em output/ibm_daily.parquet
 ```
 
 ---
 
-## 🏛️ Arquitetura
+## 📚 Usage Example
 
-O sistema é projetado com uma arquitetura de pipeline, onde os dados fluem através de estágios de coleta, processamento e armazenamento.
+### Building a Custom Data Pipeline
 
-![Arquitetura do Pipeline de Dados](https://i.imgur.com/U6R9HzkpkXEP.png)
+```rust
+use rmdp_data::fetch_market_data;
+use rmdp_core::process_data;
+use polars::prelude::*;
 
-### Crates
+#[tokio::main]
+async fn main() -> Result<()> {
+    // Fetch data from API
+    let raw_data = fetch_market_data(
+        "IBM",
+        "TIME_SERIES_DAILY",
+        "YOUR_API_KEY"
+    ).await?;
 
-- `rmdp-core`: Orquestra o pipeline e contém a lógica de processamento.
-- `rmdp-data`: Responsável pela conexão com fontes de dados externas.
-- `rmdp-utils`: Funções utilitárias, como a configuração de logs.
+    // Process and clean data
+    let processed_data = process_data(&raw_data)?;
+
+    // Store in Parquet format
+    ParquetWriter::new(File::create("output/data.parquet")?)
+        .finish(&mut processed_data)?;
+
+    println!("Pipeline completed successfully!");
+    Ok(())
+}
+```
+
+---
+
+## 🏗️ Architecture
+
+The pipeline follows a modular ETL (Extract, Transform, Load) architecture:
+
+```
+┌─────────────┐      ┌──────────────┐      ┌─────────────┐
+│   Extract   │ ───> │  Transform   │ ───> │    Load     │
+│  (Ingest)   │      │  (Process)   │      │  (Storage)  │
+└─────────────┘      └──────────────┘      └─────────────┘
+      │                     │                      │
+   API Data          Clean & Normalize        Parquet
+```
+
+### Project Structure
+
+```
+rust-market-data-pipeline/
+├── crates/
+│   ├── core/          # Pipeline orchestration & processing
+│   ├── data/          # Data connectors & API integrations
+│   └── utils/         # Logging & utilities
+├── examples/          # Usage examples
+├── output/           # Processed data storage
+└── docs/             # Documentation & images
+```
+
+### Crate Descriptions
+
+| Crate | Description |
+|-------|-------------|
+| **rmdp-core** | Pipeline orchestration and data processing logic |
+| **rmdp-data** | API connectors for external data sources |
+| **rmdp-utils** | Logging and utility functions |
+
+---
+
+## 📊 Supported Data Sources
+
+- ✅ **Alpha Vantage** - Stock market data
+- 🔜 **Yahoo Finance** - Historical and real-time quotes
+- 🔜 **CoinGecko** - Cryptocurrency data
+- 🔜 **Binance** - Crypto exchange data
+- 🔜 **IEX Cloud** - Financial data API
 
 ---
 
 ## 🛣️ Roadmap
 
-- [ ] Adicionar suporte para mais fontes de dados (ex: Yahoo Finance, CoinGecko).
-- [ ] Implementar processamento de dados em streaming com Tokio.
-- [ ] Adicionar um sistema de cache com Redis para evitar requisições repetidas.
-- [ ] Integrar com um banco de dados de séries temporais (ex: InfluxDB, TimescaleDB).
-- [ ] Criar um dashboard de monitoramento para o pipeline.
+- [ ] Add support for more data sources (Yahoo Finance, CoinGecko)
+- [ ] Implement real-time streaming with WebSockets
+- [ ] Add Redis caching layer for API responses
+- [ ] Integration with time-series databases (InfluxDB, TimescaleDB)
+- [ ] Create monitoring dashboard for pipeline health
+- [ ] Add data quality validation and alerts
+- [ ] Implement retry logic and error handling
+- [ ] Support for multiple output formats (CSV, JSON, Parquet)
 
 ---
 
-## 🤝 Contribuição
+## 🤝 Contributing
 
-Contribuições são bem-vindas! Sinta-se à vontade para abrir uma issue ou enviar um pull request.
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/DataSource`)
+3. Commit your changes (`git commit -m 'Add new data source'`)
+4. Push to the branch (`git push origin feature/DataSource`)
+5. Open a Pull Request
 
 ---
 
-## 📜 Licença
+## 📜 License
 
-Este projeto está licenciado sob a licença MIT.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-## 👨‍💻 Autor
+## 👨‍💻 Author
 
 **Gabriel Demetrios Lafis**
 
-*   Cientista de Dados | Analista de Dados | BI/BA
-*   Formado em Análise e Desenvolvimento de Sistemas, Gestão da Tecnologia da Informação e Segurança Cibernética.
+- 🎓 Systems Analysis and Development | IT Management | Cybersecurity
+- 💼 Data Scientist | Data Analyst | BI/BA
+- 🔗 [GitHub](https://github.com/galafis)
 
+---
+
+## 🙏 Acknowledgments
+
+- Built with [Rust](https://www.rust-lang.org/)
+- Async runtime: [Tokio](https://tokio.rs/)
+- Data processing: [Polars](https://www.pola.rs/)
+- Storage format: [Apache Parquet](https://parquet.apache.org/)
+
+---
+
+<div align="center">
+  <p>Made with ❤️ and Rust</p>
+  <p>⭐ Star this repository if you find it useful!</p>
+</div>
