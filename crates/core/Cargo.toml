@@ -8,4 +8,4 @@ authors = ["Gabriel Demetrios Lafis"]
 polars = { workspace = true }
 log = { workspace = true }
 rmdp-data = { path = "../data" }
-
+anyhow = { workspace = true }

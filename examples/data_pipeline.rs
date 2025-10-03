@@ -10,7 +10,7 @@ async fn main() -> Result<()> {
     // Substitua "YOUR_API_KEY" pela sua chave de API da Alpha Vantage
     let api_key = "YOUR_API_KEY";
     let symbol = "IBM";
-    let output_path = "data/ibm_daily.parquet";
+    let output_path = "output/ibm_daily.parquet";
 
     let df = fetch_alphavantage_data(symbol, api_key).await?;
     println!("Dados brutos recebidos:\n{}", df);
@@ -20,4 +20,3 @@ async fn main() -> Result<()> {
 
     Ok(())
 }
-

@@ -1,5 +1,10 @@
 # rust-market-data-pipeline
 
+![Rust](https://img.shields.io/badge/rust-%23000000.svg?style=for-the-badge&logo=rust&logoColor=white)
+![License](https://img.shields.io/badge/license-MIT-blue.svg?style=for-the-badge)
+![Tokio](https://img.shields.io/badge/tokio-async-green.svg?style=for-the-badge)
+![Polars](https://img.shields.io/badge/polars-data-orange.svg?style=for-the-badge)
+
 **A robust Rust-based data pipeline for ingesting, processing, and storing real-time financial market data.**
 
 ---
