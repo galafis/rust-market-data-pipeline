@@ -1,0 +1,11 @@
+[package]
+name = "rmdp-core"
+version = "0.1.0"
+edition = "2021"
+authors = ["Gabriel Demetrios Lafis"]
+
+[dependencies]
+polars = { workspace = true }
+log = { workspace = true }
+rmdp-data = { path = "../data" }
+
