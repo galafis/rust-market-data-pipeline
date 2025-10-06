@@ -1,0 +1,40 @@
+graph LR
+    subgraph "Data Sources"
+        AV[Alpha Vantage API]
+        YF[Yahoo Finance]
+        Other[Other APIs]
+    end
+    
+    subgraph "Ingestion"
+        Fetch[Data Fetcher<br/>Async HTTP]
+        Parse[JSON Parser]
+    end
+    
+    subgraph "Processing"
+        Clean[Data Cleaning]
+        Norm[Normalization]
+        Transform[Transformation]
+    end
+    
+    subgraph "Storage"
+        Parquet[Parquet Files]
+        DB[(Time-Series DB)]
+    end
+    
+    AV -->|REST API| Fetch
+    YF -->|REST API| Fetch
+    Other -->|REST API| Fetch
+    Fetch --> Parse
+    Parse --> Clean
+    Clean --> Norm
+    Norm --> Transform
+    Transform --> Parquet
+    Transform --> DB
+    
+    style Fetch fill:#e1f5ff
+    style Parse fill:#e1f5ff
+    style Clean fill:#fff4e1
+    style Norm fill:#fff4e1
+    style Transform fill:#fff4e1
+    style Parquet fill:#e8f5e9
+    style DB fill:#e8f5e9

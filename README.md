@@ -119,6 +119,12 @@ async fn main() -> Result<()> {
 
 The pipeline follows a modular ETL (Extract, Transform, Load) architecture:
 
+<div align="center">
+  <img src="docs/dataflow.png" alt="Data Flow Diagram" width="700"/>
+</div>
+
+### ETL Process
+
 ```
 ┌─────────────┐      ┌──────────────┐      ┌─────────────┐
 │   Extract   │ ───> │  Transform   │ ───> │    Load     │
