@@ -123,6 +123,20 @@ The pipeline follows a modular ETL (Extract, Transform, Load) architecture:
   <img src="docs/dataflow.png" alt="Data Flow Diagram" width="700"/>
 </div>
 
+```mermaid
+flowchart LR
+    A[Data Sources\nAlpha Vantage / APIs] --> B[Ingestion\nHTTP Client / Tokio]
+    B --> C[Normalization\nCleaning & Parsing]
+    C --> D[Storage\nApache Parquet]
+    D --> E[Distribution\nDownstream Consumers]
+
+    style A fill:#1a1a2e,stroke:#e94560,color:#fff
+    style B fill:#16213e,stroke:#0f3460,color:#fff
+    style C fill:#0f3460,stroke:#533483,color:#fff
+    style D fill:#533483,stroke:#e94560,color:#fff
+    style E fill:#1a1a2e,stroke:#e94560,color:#fff
+```
+
 ### ETL Process
 
 ```
